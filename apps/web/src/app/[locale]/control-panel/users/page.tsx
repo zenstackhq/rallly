@@ -1,9 +1,3 @@
-import type { Prisma } from "@rallly/database";
-import { prisma } from "@rallly/database";
-import { UsersIcon } from "lucide-react";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import z from "zod";
 import { PageIcon } from "@/app/components/page-icons";
 import { requireUser } from "@/auth/data";
 import {
@@ -22,6 +16,11 @@ import { Pagination } from "@/components/pagination";
 import { StackedList } from "@/components/stacked-list";
 import { Trans } from "@/components/trans";
 import { getTranslation } from "@/i18n/server";
+import { db, type InputTypes } from "@rallly/database";
+import { UsersIcon } from "lucide-react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import z from "zod";
 import { UserRow } from "./user-row";
 import { UserSearchInput } from "./user-search-input";
 import { UsersTabbedView } from "./users-tabbed-view";
@@ -43,7 +42,7 @@ async function loadData({
     notFound();
   }
 
-  const where: Prisma.UserWhereInput = {};
+  const where: InputTypes.UserWhereInput = {};
 
   if (q) {
     where.OR = [
@@ -66,7 +65,7 @@ async function loadData({
     where.role = role;
   }
 
-  const allUsers = await prisma.user.findMany({
+  const allUsers = await db.user.findMany({
     select: {
       id: true,
       name: true,
@@ -82,7 +81,7 @@ async function loadData({
     },
   });
 
-  const totalUsers = await prisma.user.count({
+  const totalUsers = await db.user.count({
     where,
   });
 

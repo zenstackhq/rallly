@@ -1,6 +1,9 @@
 "use client";
 
-import type { TimeFormat } from "@rallly/database";
+import { usePreferences } from "@/contexts/preferences";
+import { useTranslation } from "@/i18n/client";
+import { getBrowserTimeZone, normalizeTimeZone } from "@/utils/date-time-utils";
+import type { ModelTypes } from "@rallly/database";
 import type { SupportedLocale } from "@rallly/languages";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -17,16 +20,13 @@ import updateLocale from "dayjs/plugin/updateLocale";
 import utc from "dayjs/plugin/utc";
 import * as React from "react";
 import { useAsync } from "react-use";
-import { usePreferences } from "@/contexts/preferences";
-import { useTranslation } from "@/i18n/client";
-import { getBrowserTimeZone, normalizeTimeZone } from "@/utils/date-time-utils";
 import { useRequiredContext } from "../components/use-required-context";
 
 const dayjsLocales: Record<
   SupportedLocale,
   {
     weekStart: number;
-    timeFormat: TimeFormat;
+    timeFormat: ModelTypes.TimeFormat;
     import: () => Promise<ILocale>;
   }
 > = {
@@ -143,10 +143,10 @@ const DayjsContext = React.createContext<{
   dayjs: (date?: dayjs.ConfigType) => dayjs.Dayjs;
   locale: {
     weekStart: number;
-    timeFormat: TimeFormat;
+    timeFormat: ModelTypes.TimeFormat;
   };
   timeZone: string;
-  timeFormat: TimeFormat;
+  timeFormat: ModelTypes.TimeFormat;
   weekStart: number;
 } | null>(null);
 
@@ -163,7 +163,7 @@ export const DayjsProvider: React.FunctionComponent<{
     timeZone?: string;
     localeOverrides?: {
       weekStart?: number;
-      timeFormat?: TimeFormat;
+      timeFormat?: ModelTypes.TimeFormat;
     };
   };
 }> = ({ config, children }) => {

@@ -1,4 +1,4 @@
-import { prisma } from "@rallly/database";
+import { db } from "@rallly/database";
 import {
   CalendarCheck2Icon,
   LanguagesIcon,
@@ -12,7 +12,7 @@ import { getTranslation } from "@/i18n/server";
 
 export async function Bonus() {
   const { t } = await getTranslation();
-  const userCount = await prisma.user.count({
+  const userCount = await db.user.count({
     where: {
       isAnonymous: false,
     },

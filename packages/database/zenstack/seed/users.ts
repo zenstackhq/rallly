@@ -1,0 +1,190 @@
+import { db } from '@rallly/database';
+import dayjs from 'dayjs';
+
+async function createUser({
+    id,
+    name,
+    email,
+    timeZone,
+    space,
+}: {
+    id: string;
+    name: string;
+    email: string;
+    timeZone: string;
+    space: {
+        id: string;
+        name: string;
+        isPro: boolean;
+    };
+}) {
+    const user = await db.user.create({
+        data: {
+            id,
+            name,
+            email,
+            timeZone,
+            spaces: {
+                create: {
+                    id: space.id,
+                    name: space.name,
+                    tier: space.isPro ? 'pro' : 'hobby',
+                },
+            },
+        },
+    });
+
+    await db.spaceMember.create({
+        data: {
+            spaceId: space.id,
+            userId: id,
+            role: 'ADMIN',
+        },
+    });
+
+    return user;
+}
+
+async function createTeamSpace() {
+    console.info('Creating team space...');
+
+    // Create team owner first
+    const teamOwner = await db.user.create({
+        data: {
+            id: 'team-owner',
+            name: 'Sarah Johnson',
+            email: 'sarah@rallly.co',
+            timeZone: 'America/New_York',
+        },
+    });
+
+    // Then create the team space
+    const teamSpace = await db.space.create({
+        data: {
+            id: 'team-space-1',
+            name: 'Acme Corp Team',
+            ownerId: teamOwner.id,
+            tier: 'pro',
+        },
+    });
+
+    const teamMembers = await Promise.all([
+        db.user.create({
+            data: {
+                id: 'team-admin',
+                name: 'Michael Chen',
+                email: 'michael@rallly.co',
+                timeZone: 'America/Los_Angeles',
+            },
+        }),
+        db.user.create({
+            data: {
+                id: 'team-member-1',
+                name: 'Emily Rodriguez',
+                email: 'emily@rallly.co',
+                timeZone: 'America/Chicago',
+            },
+        }),
+        db.user.create({
+            data: {
+                id: 'team-member-2',
+                name: 'James Wilson',
+                email: 'james@rallly.co',
+                timeZone: 'Europe/London',
+            },
+        }),
+        db.user.create({
+            data: {
+                id: 'team-member-3',
+                name: 'Lisa Park',
+                email: 'lisa@rallly.co',
+                timeZone: 'Asia/Tokyo',
+            },
+        }),
+    ]);
+
+    // Add team members to space with different roles
+    await Promise.all([
+        db.spaceMember.create({
+            data: {
+                spaceId: teamSpace.id,
+                userId: teamOwner.id,
+                role: 'ADMIN',
+                lastSelectedAt: new Date(),
+            },
+        }),
+        db.spaceMember.create({
+            data: {
+                spaceId: teamSpace.id,
+                userId: 'team-admin',
+                role: 'ADMIN',
+                lastSelectedAt: new Date(),
+            },
+        }),
+        db.spaceMember.create({
+            data: {
+                spaceId: teamSpace.id,
+                userId: 'team-member-1',
+                role: 'MEMBER',
+                lastSelectedAt: new Date(),
+            },
+        }),
+        db.spaceMember.create({
+            data: {
+                spaceId: teamSpace.id,
+                userId: 'team-member-2',
+                role: 'MEMBER',
+                lastSelectedAt: new Date(),
+            },
+        }),
+        db.spaceMember.create({
+            data: {
+                spaceId: teamSpace.id,
+                userId: 'team-member-3',
+                role: 'MEMBER',
+                lastSelectedAt: new Date(),
+            },
+        }),
+    ]);
+
+    console.info(
+        `✓ Seeded team space with ${[teamOwner, ...teamMembers].length} members`
+    );
+
+    return [teamOwner, ...teamMembers];
+}
+
+export async function seedUsers() {
+    console.info('Seeding users...');
+    const freeUser = await createUser({
+        id: 'free-user',
+        name: 'Dev User',
+        email: 'dev@rallly.co',
+        timeZone: 'America/New_York',
+        space: {
+            id: 'space-1',
+            name: 'Personal',
+            isPro: false,
+        },
+    });
+
+    const proUser = await createUser({
+        id: 'pro-user',
+        name: 'Pro User',
+        email: 'dev+pro@rallly.co',
+        timeZone: 'America/New_York',
+        space: {
+            id: 'space-2',
+            name: 'Personal',
+            isPro: true,
+        },
+    });
+
+    // Create team space with multiple members
+    const teamMembers = await createTeamSpace();
+
+    console.info(`✓ Seeded user ${freeUser.email}`);
+    console.info(`✓ Seeded user ${proUser.email}`);
+
+    return [freeUser, proUser, ...teamMembers];
+}

@@ -1,4 +1,4 @@
-import { prisma } from "@rallly/database";
+import { db } from "@rallly/database";
 import { notFound } from "next/navigation";
 import { FullLogoLink } from "@/app/components/full-logo-link";
 import { requireUser } from "@/auth/data";
@@ -16,7 +16,7 @@ export default async function JoinPage({
 }) {
   const { inviteId } = await params;
   const user = await requireUser();
-  const invite = await prisma.spaceMemberInvite.findUnique({
+  const invite = await db.spaceMemberInvite.findUnique({
     where: {
       id: inviteId,
     },
@@ -111,7 +111,7 @@ export async function generateMetadata({
 }) {
   const { inviteId } = await params;
   const { t } = await getTranslation();
-  const invite = await prisma.spaceMemberInvite.findUnique({
+  const invite = await db.spaceMemberInvite.findUnique({
     where: {
       id: inviteId,
     },

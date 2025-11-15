@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { VoteType } from "@rallly/database";
 import { cn } from "@rallly/ui";
 import { Badge } from "@rallly/ui/badge";
 import { Button } from "@rallly/ui/button";
@@ -13,6 +12,7 @@ import z from "zod";
 import { usePoll } from "@/contexts/poll";
 import { useTranslation } from "@/i18n/client";
 import { useTimezone } from "@/lib/timezone/client/context";
+import type { ModelTypes } from "@rallly/database";
 import { useAddParticipantMutation } from "./poll/mutations";
 import VoteIcon from "./poll/vote-icon";
 import { useUser } from "./user-provider";
@@ -34,7 +34,7 @@ const schema = z.union([requiredEmailSchema, optionalEmailSchema]);
 type NewParticipantFormData = z.infer<typeof schema>;
 
 interface NewParticipantModalProps {
-  votes: { optionId: string; type: VoteType }[];
+  votes: { optionId: string; type: ModelTypes.VoteType }[];
   onSubmit?: (data: { id: string }) => void;
   onCancel?: () => void;
 }
@@ -44,10 +44,10 @@ const VoteSummary = ({
   className,
 }: {
   className?: string;
-  votes: { optionId: string; type: VoteType }[];
+  votes: { optionId: string; type: ModelTypes.VoteType }[];
 }) => {
   const { t } = useTranslation();
-  const voteByType = votes.reduce<Record<VoteType, string[]>>(
+  const voteByType = votes.reduce<Record<ModelTypes.VoteType, string[]>>(
     (acc, vote) => {
       acc[vote.type] = [...acc[vote.type], vote.optionId];
       return acc;
@@ -55,7 +55,7 @@ const VoteSummary = ({
     { yes: [], ifNeedBe: [], no: [] },
   );
 
-  const voteTypes = Object.keys(voteByType) as VoteType[];
+  const voteTypes = Object.keys(voteByType) as ModelTypes.VoteType[];
 
   return (
     <div

@@ -1,25 +1,25 @@
-import { prisma } from "@rallly/database";
+import { db } from '@rallly/database';
 
 export async function createSpace({
-  name = "Personal",
-  ownerId,
+    name = 'Personal',
+    ownerId,
 }: {
-  name?: string;
-  ownerId: string;
+    name?: string;
+    ownerId: string;
 }) {
-  const space = await prisma.space.create({
-    data: {
-      name,
-      ownerId,
-      members: {
-        create: {
-          userId: ownerId,
-          role: "ADMIN",
-          lastSelectedAt: new Date(),
+    const space = await db.space.create({
+        data: {
+            name,
+            ownerId,
+            members: {
+                create: {
+                    userId: ownerId,
+                    role: 'ADMIN',
+                    lastSelectedAt: new Date(),
+                },
+            },
         },
-      },
-    },
-  });
+    });
 
-  return space;
+    return space;
 }

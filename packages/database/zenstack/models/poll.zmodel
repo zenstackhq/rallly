@@ -1,3 +1,7 @@
+import 'user'
+import 'space'
+import 'event'
+
 enum ParticipantVisibility {
   full
   scoresOnly

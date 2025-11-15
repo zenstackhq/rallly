@@ -1,4 +1,4 @@
-import { prisma } from "@rallly/database";
+import { db } from "@rallly/database";
 import { Tile, TileDescription, TileGrid, TileTitle } from "@rallly/ui/tile";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -40,7 +40,7 @@ async function loadData() {
     seatCount,
     hasNoAccounts,
   ] = await Promise.all([
-    prisma.poll.count({
+    db.poll.count({
       where: {
         spaceId: space.id,
         status: "live",

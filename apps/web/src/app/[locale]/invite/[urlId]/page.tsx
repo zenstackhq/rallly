@@ -1,4 +1,4 @@
-import { prisma } from "@rallly/database";
+import { db } from "@rallly/database";
 import { absoluteUrl } from "@rallly/utils/absolute-url";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import type { Metadata } from "next";
@@ -66,7 +66,7 @@ export async function generateMetadata(props: {
 
   const { urlId } = params;
 
-  const poll = await prisma.poll.findUnique({
+  const poll = await db.poll.findUnique({
     where: {
       id: urlId as string,
     },

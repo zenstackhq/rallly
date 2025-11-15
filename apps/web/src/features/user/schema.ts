@@ -1,20 +1,20 @@
-import type { TimeFormat } from "@prisma/client";
-import z from "zod";
+import type { ModelTypes } from '@rallly/database';
+import z from 'zod';
 
-export const userRoleSchema = z.enum(["admin", "user"]);
+export const userRoleSchema = z.enum(['admin', 'user']);
 
 export type UserRole = z.infer<typeof userRoleSchema>;
 
 export type UserDTO = {
-  id: string;
-  name: string;
-  image?: string;
-  email: string;
-  role: UserRole;
-  isGuest: boolean;
-  timeZone?: string;
-  timeFormat?: TimeFormat;
-  locale?: string;
-  weekStart?: number;
-  customerId?: string;
+    id: string;
+    name: string;
+    image?: string;
+    email: string;
+    role: UserRole;
+    isGuest: boolean;
+    timeZone?: string;
+    timeFormat?: ModelTypes.TimeFormat;
+    locale?: string;
+    weekStart?: number;
+    customerId?: string;
 };

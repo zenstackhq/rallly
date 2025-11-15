@@ -1,20 +1,32 @@
-import { PrismaClient } from "@prisma/client";
+import { ZenStackClient, type ClientContract } from '@zenstackhq/orm';
+import { PostgresDialect } from 'kysely';
+import { Pool } from 'pg';
+import { schema, type SchemaType } from './zenstack/schema';
 
-export type * from "@prisma/client";
+export type { JsonObject } from '@zenstackhq/orm';
+export * as InputTypes from './zenstack/input';
+export * as ModelTypes from './zenstack/models';
 
-const prismaClientSingleton = () => {
-  return new PrismaClient();
+const dbSingleton = () => {
+    return new ZenStackClient(schema, {
+        dialect: new PostgresDialect({
+            pool: new Pool({
+                connectionString: process.env.DATABASE_URL,
+            }),
+        }),
+        log: ['query'],
+    });
 };
 
-export type ExtendedPrismaClient = ReturnType<typeof prismaClientSingleton>;
+export type DatabaseClient = ClientContract<SchemaType>;
 
 // biome-ignore lint/suspicious/noShadowRestrictedNames: Fix this later
 declare const globalThis: {
-  prismaGlobal: ExtendedPrismaClient;
+    dbGlobal: ClientContract<SchemaType>;
 } & typeof global;
 
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
+const db = globalThis.dbGlobal ?? dbSingleton();
 
-export { prisma };
+export { db };
 
-if (process.env.NODE_ENV !== "production") globalThis.prismaGlobal = prisma;
+if (process.env.NODE_ENV !== 'production') globalThis.dbGlobal = db;

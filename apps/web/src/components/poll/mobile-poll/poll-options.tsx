@@ -1,10 +1,10 @@
-import type { VoteType } from "@rallly/database";
+import { usePoll } from "@/components/poll-context";
+import { useVotingForm } from "@/components/poll/voting-form";
+import type { ParsedDateTimeOpton } from "@/utils/date-time-utils";
 import type * as React from "react";
 import { Controller } from "react-hook-form";
-import { useVotingForm } from "@/components/poll/voting-form";
-import { usePoll } from "@/components/poll-context";
-import type { ParsedDateTimeOpton } from "@/utils/date-time-utils";
 
+import type { ModelTypes } from "@rallly/database";
 import DateOption from "./date-option";
 import TimeSlotOption from "./time-slot-option";
 
@@ -50,7 +50,7 @@ const PollOptions: React.FunctionComponent<PollOptions> = ({
                   ? getVote(selectedParticipant.id, option.optionId)
                   : field.value[index]?.type;
 
-              const handleChange = (newVote: VoteType) => {
+              const handleChange = (newVote: ModelTypes.VoteType) => {
                 if (!editable) {
                   return;
                 }

@@ -1,3 +1,8 @@
+import 'user'
+import 'poll'
+import 'billing'
+import 'event'
+
 model Space {
   id        String    @id @default(uuid())
   name      String

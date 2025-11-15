@@ -1,21 +1,21 @@
-import type { VoteType } from "@rallly/database";
 import { cn } from "@rallly/ui";
 import * as React from "react";
 
+import type { ModelTypes } from "@rallly/database";
 import VoteIcon from "./vote-icon";
 
 export interface VoteSelectorProps {
-  value?: VoteType;
-  onChange?: (value: VoteType) => void;
+  value?: ModelTypes.VoteType;
+  onChange?: (value: ModelTypes.VoteType) => void;
   onFocus?: React.FocusEventHandler<HTMLButtonElement>;
   onBlur?: React.FocusEventHandler<HTMLButtonElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
   className?: string;
 }
 
-const orderedVoteTypes: VoteType[] = ["yes", "ifNeedBe", "no"];
+const orderedVoteTypes: ModelTypes.VoteType[] = ["yes", "ifNeedBe", "no"];
 
-export const toggleVote = (value?: VoteType) => {
+export const toggleVote = (value?: ModelTypes.VoteType) => {
   if (!value) return orderedVoteTypes[0];
   return orderedVoteTypes[
     (orderedVoteTypes.indexOf(value) + 1) % orderedVoteTypes.length

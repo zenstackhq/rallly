@@ -1,10 +1,3 @@
-import type { PollStatus } from "@rallly/database";
-import { Button } from "@rallly/ui/button";
-import { Icon } from "@rallly/ui/icon";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { InboxIcon, PlusIcon } from "lucide-react";
-import type { Metadata } from "next";
-import Link from "next/link";
 import { PollsTabbedView } from "@/app/[locale]/(space)/(dashboard)/polls/polls-tabbed-view";
 import {
   PageContainer,
@@ -28,6 +21,13 @@ import { PollsInfiniteList } from "@/features/poll/components/polls-infinite-lis
 import { loadMembers } from "@/features/space/data";
 import { getTranslation } from "@/i18n/server";
 import { createSSRHelper } from "@/trpc/server/create-ssr-helper";
+import type { ModelTypes } from "@rallly/database";
+import { Button } from "@rallly/ui/button";
+import { Icon } from "@rallly/ui/icon";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { InboxIcon, PlusIcon } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { searchParamsSchema } from "./schema";
 
 async function loadData({
@@ -35,7 +35,7 @@ async function loadData({
   q,
   member,
 }: {
-  status?: PollStatus;
+  status?: ModelTypes.PollStatus;
   q?: string;
   member?: string;
 }) {

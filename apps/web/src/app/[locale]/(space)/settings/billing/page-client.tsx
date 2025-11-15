@@ -1,6 +1,18 @@
 "use client";
 
-import type { SubscriptionStatus } from "@rallly/database";
+import {
+  PageSection,
+  PageSectionContent,
+  PageSectionDescription,
+  PageSectionDivider,
+  PageSectionGroup,
+  PageSectionHeader,
+  PageSectionTitle,
+} from "@/app/components/page-layout";
+import { useBilling } from "@/features/billing/client";
+import { SubscriptionStatusLabel } from "@/features/billing/components/subscription-status-label";
+import type { SpaceTier } from "@/features/space/schema";
+import type { ModelTypes } from "@rallly/database";
 import { usePostHog } from "@rallly/posthog/client";
 import { Alert, AlertDescription, AlertTitle } from "@rallly/ui/alert";
 import { Button } from "@rallly/ui/button";
@@ -14,18 +26,6 @@ import {
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Trans } from "react-i18next";
-import {
-  PageSection,
-  PageSectionContent,
-  PageSectionDescription,
-  PageSectionDivider,
-  PageSectionGroup,
-  PageSectionHeader,
-  PageSectionTitle,
-} from "@/app/components/page-layout";
-import { useBilling } from "@/features/billing/client";
-import { SubscriptionStatusLabel } from "@/features/billing/components/subscription-status-label";
-import type { SpaceTier } from "@/features/space/schema";
 import { BillingPlan } from "./components/billing-plan";
 import { ManageSeatsDialog } from "./components/manage-seats-dialog";
 
@@ -38,7 +38,7 @@ export function BillingPageClient({
   tier: SpaceTier;
   subscription?: {
     id: string;
-    status: SubscriptionStatus;
+    status: ModelTypes.SubscriptionStatus;
     cancelAtPeriodEnd: boolean;
     periodEnd: Date;
   };

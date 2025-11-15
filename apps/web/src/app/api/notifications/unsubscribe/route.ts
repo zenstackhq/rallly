@@ -1,60 +1,66 @@
-import { prisma } from "@rallly/database";
-import { cookies } from "next/headers";
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { db } from '@rallly/database';
+import { cookies } from 'next/headers';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-import { getSession } from "@/lib/auth";
-import type { DisableNotificationsPayload } from "@/trpc/types";
-import { decryptToken } from "@/utils/session";
+import { getSession } from '@/lib/auth';
+import type { DisableNotificationsPayload } from '@/trpc/types';
+import { decryptToken } from '@/utils/session';
 
 export const GET = async (req: NextRequest) => {
-  const token = req.nextUrl.searchParams.get("token");
+    const token = req.nextUrl.searchParams.get('token');
 
-  if (!token) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
+    if (!token) {
+        return NextResponse.redirect(new URL('/login', req.url));
+    }
 
-  const session = await getSession();
+    const session = await getSession();
 
-  if (!session || !session.user?.email) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
+    if (!session || !session.user?.email) {
+        return NextResponse.redirect(new URL('/login', req.url));
+    }
 
-  const payload = await decryptToken<DisableNotificationsPayload>(token);
+    const payload = await decryptToken<DisableNotificationsPayload>(token);
 
-  if (!payload) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
+    if (!payload) {
+        return NextResponse.redirect(new URL('/login', req.url));
+    }
 
-  const watcher = await prisma.watcher.findFirst({
-    where: {
-      userId: session.user.id,
-      pollId: payload.pollId,
-    },
-  });
-
-  if (watcher) {
-    await prisma.watcher.delete({
-      where: {
-        id: watcher.id,
-      },
-      select: {
-        pollId: true,
-      },
+    const watcher = await db.watcher.findFirst({
+        where: {
+            userId: session.user.id,
+            pollId: payload.pollId,
+        },
     });
 
-    // Set a session cookie to indicate that the user has unsubscribed
-    (await cookies()).set(`notifications-unsubscribed-${watcher.pollId}`, "1", {
-      path: "/",
-      httpOnly: false,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 5,
-    });
+    if (watcher) {
+        await db.watcher.delete({
+            where: {
+                id: watcher.id,
+            },
+            select: {
+                pollId: true,
+            },
+        });
 
-    // redirect to poll
-    return NextResponse.redirect(new URL(`/poll/${watcher.pollId}`, req.url));
-  }
+        // Set a session cookie to indicate that the user has unsubscribed
+        (await cookies()).set(
+            `notifications-unsubscribed-${watcher.pollId}`,
+            '1',
+            {
+                path: '/',
+                httpOnly: false,
+                secure: false,
+                sameSite: 'lax',
+                maxAge: 5,
+            }
+        );
 
-  return NextResponse.redirect(new URL(`/poll/${payload.pollId}`, req.url));
+        // redirect to poll
+        return NextResponse.redirect(
+            new URL(`/poll/${watcher.pollId}`, req.url)
+        );
+    }
+
+    return NextResponse.redirect(new URL(`/poll/${payload.pollId}`, req.url));
 };

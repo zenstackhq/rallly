@@ -1,6 +1,5 @@
 "use client";
 
-import type { TimeFormat } from "@rallly/database";
 import React from "react";
 import { useLocalStorage } from "react-use";
 import { z } from "zod";
@@ -8,10 +7,11 @@ import { z } from "zod";
 import { useRequiredContext } from "@/components/use-required-context";
 import { useUser } from "@/components/user-provider";
 import { trpc } from "@/trpc/client";
+import type { ModelTypes } from "@rallly/database";
 
 type Preferences = {
   timeZone?: string;
-  timeFormat?: TimeFormat;
+  timeFormat?: ModelTypes.TimeFormat;
   weekStart?: number;
 };
 

@@ -1,4 +1,3 @@
-import type { Participant, VoteType } from "@rallly/database";
 import * as React from "react";
 
 import { useVisibility } from "@/components/visibility";
@@ -6,11 +5,12 @@ import { usePermissions } from "@/contexts/permissions";
 import { trpc } from "@/trpc/client";
 import type { Vote } from "@/trpc/client/types";
 
+import type { ModelTypes } from "@rallly/database";
 import { useRequiredContext } from "./use-required-context";
 
 const ParticipantsContext = React.createContext<{
-  participants: Array<Participant & { votes: Vote[] }>;
-  getParticipants: (optionId: string, voteType: VoteType) => Participant[];
+  participants: Array<ModelTypes.Participant & { votes: Vote[] }>;
+  getParticipants: (optionId: string, voteType: ModelTypes.VoteType) => ModelTypes.Participant[];
 } | null>(null);
 
 export const useParticipants = () => {
@@ -27,8 +27,8 @@ export const ParticipantsProvider: React.FunctionComponent<{
 
   const getParticipants = (
     optionId: string,
-    voteType: VoteType,
-  ): Participant[] => {
+    voteType: ModelTypes.VoteType,
+  ): ModelTypes.Participant[] => {
     if (!participants) {
       return [];
     }

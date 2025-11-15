@@ -1,33 +1,33 @@
-"use server";
+'use server';
 
-import { prisma } from "@rallly/database";
-import { headers } from "next/headers";
-import { getUserIdIfLoggedIn } from "@/lib/auth";
+import { db } from '@rallly/database';
+import { headers } from 'next/headers';
+import { getUserIdIfLoggedIn } from '@/lib/auth';
 
 /**
  * Server action to track a poll view
  * Records information about the view in the database
  */
 export async function trackPollView(pollId: string) {
-  try {
-    const headersList = await headers();
-    const userAgent = headersList.get("user-agent");
-    const ip = headersList.get("x-forwarded-for") || "unknown";
+    try {
+        const headersList = await headers();
+        const userAgent = headersList.get('user-agent');
+        const ip = headersList.get('x-forwarded-for') || 'unknown';
 
-    const userId = await getUserIdIfLoggedIn();
+        const userId = await getUserIdIfLoggedIn();
 
-    await prisma.pollView.create({
-      data: {
-        pollId,
-        userId,
-        ipAddress: ip,
-        userAgent,
-      },
-    });
+        await db.pollView.create({
+            data: {
+                pollId,
+                userId,
+                ipAddress: ip,
+                userAgent,
+            },
+        });
 
-    return { success: true };
-  } catch (error) {
-    console.error("Error recording poll view:", error);
-    return { success: false, error: "Failed to record view" };
-  }
+        return { success: true };
+    } catch (error) {
+        console.error('Error recording poll view:', error);
+        return { success: false, error: 'Failed to record view' };
+    }
 }

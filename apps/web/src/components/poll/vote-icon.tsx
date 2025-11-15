@@ -1,11 +1,11 @@
-import type { VoteType } from "@rallly/database";
-import { cn } from "@rallly/ui";
-import type { VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
 import { IfNeedBeIcon } from "@/components/vote-icon/if-need-be-icon";
 import { NoIcon } from "@/components/vote-icon/no-icon";
 import { PendingIcon } from "@/components/vote-icon/pending-icon";
 import { YesIcon } from "@/components/vote-icon/yes-icon";
+import type { ModelTypes } from "@rallly/database";
+import { cn } from "@rallly/ui";
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 
 const iconVariants = cva("", {
   variants: {
@@ -23,7 +23,7 @@ const VoteIcon = ({
   size = "md",
   className,
 }: {
-  type?: VoteType;
+  type?: ModelTypes.VoteType;
   className?: string;
 } & IconVariantProps) => {
   const iconClassName = iconVariants({ size });

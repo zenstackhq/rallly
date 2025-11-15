@@ -1,13 +1,13 @@
 "use client";
 
-import type { SubscriptionStatus } from "@rallly/database";
 import dayjs from "dayjs";
 
 import { Trans } from "@/components/trans";
 import { useTranslation } from "@/i18n/client";
+import type { ModelTypes } from "@rallly/database";
 
 interface SubscriptionStatusLabelProps {
-  status: SubscriptionStatus;
+  status: ModelTypes.SubscriptionStatus;
   cancelAtPeriodEnd: boolean;
   periodEnd: Date;
 }

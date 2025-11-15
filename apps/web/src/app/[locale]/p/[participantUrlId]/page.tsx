@@ -1,4 +1,4 @@
-import { prisma } from "@rallly/database";
+import { db } from "@rallly/database";
 import { absoluteUrl } from "@rallly/utils/absolute-url";
 import { notFound } from "next/navigation";
 
@@ -10,7 +10,7 @@ export default async function Page(props: { params: Promise<PParams> }) {
   const params = await props.params;
   const { participantUrlId } = params;
 
-  const poll = await prisma.poll.findUnique({
+  const poll = await db.poll.findUnique({
     where: { participantUrlId },
     select: { id: true },
   });

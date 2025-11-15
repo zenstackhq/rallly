@@ -1,6 +1,11 @@
 "use client";
 
-import type { ScheduledEventStatus } from "@rallly/database";
+import { OptimizedAvatarImage } from "@/components/optimized-avatar-image";
+import { StackedList } from "@/components/stacked-list";
+import { Trans } from "@/components/trans";
+import { useSafeAction } from "@/lib/safe-action/client";
+import { FormattedDateTime } from "@/lib/timezone/client/formatted-date-time";
+import type { ModelTypes } from "@rallly/database";
 import { cn } from "@rallly/ui";
 import { Badge } from "@rallly/ui/badge";
 import { Button } from "@rallly/ui/button";
@@ -23,11 +28,6 @@ import {
 import { Icon } from "@rallly/ui/icon";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@rallly/ui/tooltip";
 import { MoreHorizontalIcon } from "lucide-react";
-import { OptimizedAvatarImage } from "@/components/optimized-avatar-image";
-import { StackedList } from "@/components/stacked-list";
-import { Trans } from "@/components/trans";
-import { useSafeAction } from "@/lib/safe-action/client";
-import { FormattedDateTime } from "@/lib/timezone/client/formatted-date-time";
 import { cancelEventAction } from "../actions";
 
 export const ScheduledEventList = StackedList;
@@ -45,7 +45,7 @@ export function ScheduledEventListItem({
 }: {
   eventId: string;
   title: string;
-  status: ScheduledEventStatus;
+  status: ModelTypes.ScheduledEventStatus;
   start: Date;
   end: Date;
   allDay: boolean;

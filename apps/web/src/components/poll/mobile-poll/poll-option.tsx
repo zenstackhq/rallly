@@ -2,7 +2,6 @@
 /** biome-ignore-all lint/a11y/useKeyWithClickEvents: fix later */
 /** biome-ignore-all lint/a11y/useFocusableInteractive: fix later */
 "use client";
-import type { Participant, VoteType } from "@rallly/database";
 import { cn } from "@rallly/ui";
 import { Button } from "@rallly/ui/button";
 import { Icon } from "@rallly/ui/icon";
@@ -16,6 +15,7 @@ import { usePoll } from "@/contexts/poll";
 import { useRole } from "@/contexts/role";
 import { useTranslation } from "@/i18n/client";
 
+import type { ModelTypes } from "@rallly/database";
 import { ConnectedScoreSummary } from "../score-summary";
 import VoteIcon from "../vote-icon";
 import { VoteSelector } from "../vote-selector";
@@ -25,9 +25,9 @@ export interface PollOptionProps {
   yesScore: number;
   ifNeedBeScore: number;
   editable?: boolean;
-  vote?: VoteType;
-  onChange: (vote: VoteType) => void;
-  participants: Participant[];
+  vote?: ModelTypes.VoteType;
+  onChange: (vote: ModelTypes.VoteType) => void;
+  participants: ModelTypes.Participant[];
   selectedParticipantId?: string;
   optionId: string;
 }

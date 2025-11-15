@@ -1,4 +1,3 @@
-import type { VoteType } from "@rallly/database";
 import { cn } from "@rallly/ui";
 import { Badge } from "@rallly/ui/badge";
 import { Button } from "@rallly/ui/button";
@@ -15,6 +14,7 @@ import { useUser } from "@/components/user-provider";
 import { usePermissions } from "@/contexts/permissions";
 import type { Vote } from "@/trpc/client/types";
 
+import type { ModelTypes } from "@rallly/database";
 import VoteIcon from "../vote-icon";
 import ParticipantRowForm from "./participant-row-form";
 
@@ -35,7 +35,7 @@ export interface ParticipantRowProps {
 export const ParticipantRowView: React.FunctionComponent<{
   name: string;
   action?: React.ReactNode;
-  votes: Array<VoteType | undefined>;
+  votes: Array<ModelTypes.VoteType | undefined>;
   className?: string;
   isYou?: boolean;
   participantId: string;

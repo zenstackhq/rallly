@@ -1,4 +1,3 @@
-import type { PollStatus } from "@rallly/database";
 import { cn } from "@rallly/ui";
 import {
   Tooltip,
@@ -9,9 +8,10 @@ import {
 import { CircleCheckIcon, CirclePauseIcon, CirclePlayIcon } from "lucide-react";
 
 import { Trans } from "@/components/trans";
+import type { ModelTypes } from "@rallly/database";
 
 interface PollStatusIconProps {
-  status: PollStatus;
+  status: ModelTypes.PollStatus;
   className?: string;
   showTooltip?: boolean;
 }

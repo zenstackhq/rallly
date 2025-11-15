@@ -1,14 +1,14 @@
-import type { PollStatus } from "@rallly/database";
 import { cn } from "@rallly/ui";
 
 import { Trans } from "@/components/trans";
 import { PollStatusIcon } from "@/features/poll/components/poll-status-icon";
+import type { ModelTypes } from "@rallly/database";
 
 export const PollStatusLabel = ({
   status,
   className,
 }: {
-  status: PollStatus;
+  status: ModelTypes.PollStatus;
   className?: string;
 }) => {
   switch (status) {
@@ -48,6 +48,6 @@ export const PollStatusLabel = ({
   }
 };
 
-export const PollStatusBadge = ({ status }: { status: PollStatus }) => {
+export const PollStatusBadge = ({ status }: { status: ModelTypes.PollStatus }) => {
   return <PollStatusLabel status={status} />;
 };

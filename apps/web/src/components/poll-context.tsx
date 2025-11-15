@@ -1,4 +1,3 @@
-import type { Participant, VoteType } from "@rallly/database";
 import dayjs from "dayjs";
 import { keyBy } from "lodash";
 import { TrashIcon } from "lucide-react";
@@ -13,6 +12,7 @@ import type {
 import { getDuration } from "@/utils/date-time-utils";
 import { useDayjs } from "@/utils/dayjs";
 
+import type { ModelTypes } from "@rallly/database";
 import ErrorPage from "./error-page";
 import { useParticipants } from "./participants-provider";
 import { useRequiredContext } from "./use-required-context";
@@ -24,7 +24,7 @@ type PollContextValue = {
   highScore: number;
   optionIds: string[];
   // TODO (Luke Vella) [2022-05-18]: Move this stuff to participants provider
-  getParticipantsWhoVotedForOption: (optionId: string) => Participant[]; // maybe just attach votes to parsed options
+  getParticipantsWhoVotedForOption: (optionId: string) => ModelTypes.Participant[]; // maybe just attach votes to parsed options
   getScore: (optionId: string) => {
     yes: number;
     ifNeedBe: number;
@@ -33,8 +33,8 @@ type PollContextValue = {
   };
   getParticipantById: (
     participantId: string,
-  ) => (Participant & { votes: Vote[] }) | undefined;
-  getVote: (participantId: string, optionId: string) => VoteType | undefined;
+  ) => (ModelTypes.Participant & { votes: Vote[] }) | undefined;
+  getVote: (participantId: string, optionId: string) => ModelTypes.VoteType | undefined;
 };
 
 export const PollContext = React.createContext<PollContextValue | null>(null);
@@ -102,7 +102,7 @@ export const PollContextProvider: React.FunctionComponent<{
       (participant) => participant.id,
     );
 
-    const participantsByOptionId: Record<string, Participant[]> = {};
+    const participantsByOptionId: Record<string, ModelTypes.Participant[]> = {};
     poll.options.forEach((option) => {
       participantsByOptionId[option.id] = (participants ?? []).filter(
         (participant) =>

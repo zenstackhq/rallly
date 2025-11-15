@@ -1,3 +1,7 @@
+import 'user'
+import 'space'
+import 'poll'
+
 enum ScheduledEventStatus {
   confirmed
   canceled
