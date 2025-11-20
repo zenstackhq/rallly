@@ -169,7 +169,7 @@ export class EmailClient {
           SES: {
             ses,
             aws,
-            sendingRate: 10,
+            // sendingRate: 10,
           },
         });
         break;
