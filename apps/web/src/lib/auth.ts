@@ -1,9 +1,19 @@
+import { isEmailBlocked } from '@/auth/helpers/is-email-blocked';
+import { linkAnonymousUser } from '@/auth/helpers/merge-user';
+import { isTemporaryEmail } from '@/auth/helpers/temp-email-domains';
+import { env } from '@/env';
+import { createSpace } from '@/features/space/mutations';
+import { getTranslation } from '@/i18n/server';
+import { getLocale } from '@/i18n/server/get-locale';
+import { isKvEnabled, kv } from '@/lib/kv';
+import { getEmailClient } from '@/utils/emails';
+import { getValueByPath } from '@/utils/get-value-by-path';
 import { db } from '@rallly/database';
 import { posthog } from '@rallly/posthog/server';
 import { absoluteUrl } from '@rallly/utils/absolute-url';
+import { zenstackAdapter } from '@zenstackhq/better-auth';
 import type { BetterAuthPlugin } from 'better-auth';
 import { APIError, betterAuth } from 'better-auth';
-import { prismaAdapter } from 'better-auth/adapters/prisma';
 import {
     admin,
     anonymous,
@@ -14,20 +24,6 @@ import {
 } from 'better-auth/plugins';
 import { headers } from 'next/headers';
 import { cache } from 'react';
-import { isEmailBlocked } from '@/auth/helpers/is-email-blocked';
-import {
-    linkAnonymousUser,
-    mergeGuestsIntoUser,
-} from '@/auth/helpers/merge-user';
-import { isTemporaryEmail } from '@/auth/helpers/temp-email-domains';
-import { env } from '@/env';
-import { createSpace } from '@/features/space/mutations';
-import { getTranslation } from '@/i18n/server';
-import { getLocale } from '@/i18n/server/get-locale';
-import { isKvEnabled, kv } from '@/lib/kv';
-import { auth as legacyAuth, signOut as legacySignOut } from '@/next-auth';
-import { getEmailClient } from '@/utils/emails';
-import { getValueByPath } from '@/utils/get-value-by-path';
 
 const baseURL = absoluteUrl('/api/better-auth');
 
@@ -97,9 +93,8 @@ export const authLib = betterAuth({
     emailVerification: {
         autoSignInAfterVerification: true,
     },
-    database: prismaAdapter(db, {
+    database: zenstackAdapter(db, {
         provider: 'postgresql',
-        transaction: false, // when set to true, there is an issue where the after() hook is called before the user is actually created in the database
     }),
     plugins: [
         ...plugins,
@@ -274,22 +269,6 @@ export const authLib = betterAuth({
         session: {
             create: {
                 after: async (session) => {
-                    // Merge legacy guest users into new user
-                    const legacySession = await legacyAuth();
-
-                    if (legacySession) {
-                        if (legacySession.user?.isGuest) {
-                            await mergeGuestsIntoUser(
-                                session.userId,
-                                legacySession.user.id
-                            );
-                        }
-                        // Delete legacy session
-                        await legacySignOut({
-                            redirect: false,
-                        });
-                    }
-
                     const user = await db.user.findUnique({
                         where: { id: session.userId },
                         select: { isAnonymous: true, lastLoginMethod: true },
@@ -343,21 +322,6 @@ export const getSession = cache(async () => {
         return null;
     }
 
-    // Fallback to legacy auth
-    // TODO: Remove this once we have fully migrated to better-auth and there are no active legacy sessions left
-    try {
-        const legacySession = await legacyAuth();
-        if (legacySession) {
-            return {
-                ...legacySession,
-                legacy: true,
-            };
-        }
-    } catch (e) {
-        console.error('FAILED TO GET LEGACY SESSION', e);
-        return null;
-    }
-
     return null;
 });
 
@@ -365,9 +329,6 @@ export const signOut = async () => {
     await Promise.all([
         authLib.api.signOut({
             headers: await headers(),
-        }),
-        legacySignOut({
-            redirect: false,
         }),
     ]);
 };

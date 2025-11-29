@@ -4,17 +4,17 @@
     "version": "0.0.0",
     "scripts": {
         "build": "pnpm db:generate && pnpm type-check",
-        "db:generate": "zenstack generate",
-        "db:push": "zenstack db push",
-        "db:deploy": "zenstack migrate deploy",
-        "db:migrate": "zenstack migrate dev",
-        "db:seed": "tsx zenstack/seed.ts",
+        "db:generate": "zen generate",
+        "db:push": "zen db push",
+        "db:deploy": "zen migrate deploy",
+        "db:migrate": "zen migrate dev",
+        "db:seed": "tsx zen/seed.ts",
         "type-check": "tsc --pretty --noEmit"
     },
     "exports": "./index.ts",
     "dependencies": {
         "@types/pg": "^8.15.6",
-        "@zenstackhq/orm": "3.0.0-beta.25",
+        "@zenstackhq/orm": "3.0.0-beta.26",
         "dayjs": "^1.11.13",
         "kysely": "^0.28.8",
         "pg": "^8.16.3"
