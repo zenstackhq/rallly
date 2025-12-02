@@ -1,5 +1,5 @@
 import { ZenStackClient, type ClientContract } from '@zenstackhq/orm';
-import { PostgresDialect } from 'kysely';
+import { PostgresDialect } from '@zenstackhq/orm/dialects/postgres';
 import { Pool } from 'pg';
 import { schema, type SchemaType } from './zenstack/schema';
 

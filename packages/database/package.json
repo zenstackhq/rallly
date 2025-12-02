@@ -14,7 +14,7 @@
     "exports": "./index.ts",
     "dependencies": {
         "@types/pg": "^8.15.6",
-        "@zenstackhq/orm": "3.0.0-beta.26",
+        "@zenstackhq/orm": "3.0.0-beta.27",
         "dayjs": "^1.11.13",
         "kysely": "^0.28.8",
         "pg": "^8.16.3"

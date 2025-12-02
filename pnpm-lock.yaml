@@ -15,8 +15,8 @@ importers:
         specifier: ^1.52.0
         version: 1.56.1
       '@zenstackhq/cli':
-        specifier: 3.0.0-beta.26
-        version: 3.0.0-beta.26(typescript@5.9.3)
+        specifier: 3.0.0-beta.27
+        version: 3.0.0-beta.27(typescript@5.9.3)
       dotenv-cli:
         specifier: ^8.0.0
         version: 8.0.0
@@ -269,8 +269,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       '@zenstackhq/better-auth':
-        specifier: 3.0.0-beta.26
-        version: 3.0.0-beta.26(@better-auth/core@1.3.34(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.0.19)(jose@6.1.1)(kysely@0.28.8)(nanostores@1.0.1))(better-auth@1.3.34(next@15.5.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(pg@8.16.3)(zod@4.1.12)
+        specifier: 3.0.0-beta.27
+        version: 3.0.0-beta.27(@better-auth/core@1.3.34(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.0.19)(jose@6.1.1)(kysely@0.28.8)(nanostores@1.0.1))(better-auth@1.3.34(next@15.5.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(pg@8.16.3)(zod@4.1.12)
       ai:
         specifier: ^5.0.41
         version: 5.0.93(zod@4.1.12)
@@ -511,8 +511,8 @@ importers:
         specifier: ^8.15.6
         version: 8.15.6
       '@zenstackhq/orm':
-        specifier: 3.0.0-beta.26
-        version: 3.0.0-beta.26(pg@8.16.3)(zod@4.1.12)
+        specifier: 3.0.0-beta.27
+        version: 3.0.0-beta.27(pg@8.16.3)(zod@4.1.12)
       dayjs:
         specifier: ^1.11.13
         version: 1.11.19
@@ -4832,24 +4832,24 @@ packages:
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
 
-  '@zenstackhq/better-auth@3.0.0-beta.26':
-    resolution: {integrity: sha512-ezGETHqlttifYEhtzH1oysdZW8qR+HiIJY394foryNIDbfVcpOr8AkRtSbaF31Zm+GYt9hrL/2K8gNg5XZcDhA==}
+  '@zenstackhq/better-auth@3.0.0-beta.27':
+    resolution: {integrity: sha512-rrJut5HGTVoki0+O5mVaNMrEIWljdV7HvSb3EKGNatIs+JSROGTx2hNXH0wUbz3R01W3UX1r70H8cLPTHIhGBA==}
     peerDependencies:
       '@better-auth/core': ^1.3.0
       better-auth: ^1.3.0
 
-  '@zenstackhq/cli@3.0.0-beta.26':
-    resolution: {integrity: sha512-Q+KZUEUW7E/g88Qo3VzTEung9194tAziEWARwnW+SWUMWzWdezvzfLTM0sa4ovEIJ7NIbBu3atEJjrVAdrBhAw==}
+  '@zenstackhq/cli@3.0.0-beta.27':
+    resolution: {integrity: sha512-5+d/zvubFkABHyKLnHNa5dGauSxLpqTxXPgAAXejqA3tjAsUmHyJVluR9UStC8xk72R7xHgWYjDhNPxhdhq2YA==}
     hasBin: true
 
-  '@zenstackhq/common-helpers@3.0.0-beta.26':
-    resolution: {integrity: sha512-IceSgKuoaqw9v5f6hSrQbTXbUkM/34u1l8geZPcbL99SZdLnZrAQEXfRnKrid4bnxhQpZWODwpW5X7jk9cPoPg==}
+  '@zenstackhq/common-helpers@3.0.0-beta.27':
+    resolution: {integrity: sha512-GEUdX5Oxol0QAtkWBwvHnKinEOPFh1pvg0JG8Vb9RoOcK9+ssHxyZtq3ZHDyE7dy0V0lAmzpCLwz8wFrsem3Qg==}
 
-  '@zenstackhq/language@3.0.0-beta.26':
-    resolution: {integrity: sha512-+RPgBQl0eJ/zLhBw14MmustTpioMfx/1NSxyMIsZvXxMcZX84ZxPfuKmuSiLAKZS7GdkaVqY6hewBIEmrCkSeg==}
+  '@zenstackhq/language@3.0.0-beta.27':
+    resolution: {integrity: sha512-9E48JU+CKQJ/6a2EL1Eicbk5udVR1EnOlZ43RMxO0KePpbghhrtAI92ibf2yEYrLtE89sodRwMPZEX2xJ/1eyQ==}
 
-  '@zenstackhq/orm@3.0.0-beta.26':
-    resolution: {integrity: sha512-JYMYeGdHC+Woipfresu2e+V0HeP53GoJw+embfkdhE3eMNtY8uh+Djkh8vJbJPD2j73Nj61mFtGgiLk+QuYgYQ==}
+  '@zenstackhq/orm@3.0.0-beta.27':
+    resolution: {integrity: sha512-vg6Y6qRTTgMoMy+wC2Lahthbw0fieTDz1vfNWy7S7DySpnwy9HIA3P7JhFkOhiTnxgOIgiNmMDYYEAQryLHPHg==}
     peerDependencies:
       better-sqlite3: ^12.2.0
       pg: ^8.13.1
@@ -4863,11 +4863,11 @@ packages:
       sql.js:
         optional: true
 
-  '@zenstackhq/schema@3.0.0-beta.26':
-    resolution: {integrity: sha512-Pswmhf6wGNo8/3goLulWoIbo2SmdxudQ4UKHxkBWT6uFq/XcLwYoARzuksGjhX6gADMBPdpwrdo9hVj41R+DLg==}
+  '@zenstackhq/schema@3.0.0-beta.27':
+    resolution: {integrity: sha512-T9Wb7erqq8anHA5VIN73uI+xIXnKUkjfA5w7VwO4a8jL1PuY6k2cFtigLud7exkc305Q6DXuk3nDaYCvaSpqVg==}
 
-  '@zenstackhq/sdk@3.0.0-beta.26':
-    resolution: {integrity: sha512-vevl1uqRyxms+ba50yAkfyt5ey9uBA+XgAnyA1Oz/+hLTdSpTKoXtrvyB1IOyXnBxCRMPt5QRWmOq2qkoh535g==}
+  '@zenstackhq/sdk@3.0.0-beta.27':
+    resolution: {integrity: sha512-LDl+/sPp9rctO4eGg2WRVXoBTxP19BwvrVe2zVq738/qhC5zU6ikmDXRk4kvnk26a8PtKn6MUkBPFb/OuuJ8oQ==}
 
   abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
@@ -14931,12 +14931,12 @@ snapshots:
 
   '@xtuc/long@4.2.2': {}
 
-  '@zenstackhq/better-auth@3.0.0-beta.26(@better-auth/core@1.3.34(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.0.19)(jose@6.1.1)(kysely@0.28.8)(nanostores@1.0.1))(better-auth@1.3.34(next@15.5.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(pg@8.16.3)(zod@4.1.12)':
+  '@zenstackhq/better-auth@3.0.0-beta.27(@better-auth/core@1.3.34(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.0.19)(jose@6.1.1)(kysely@0.28.8)(nanostores@1.0.1))(better-auth@1.3.34(next@15.5.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(pg@8.16.3)(zod@4.1.12)':
     dependencies:
       '@better-auth/core': 1.3.34(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.0.19)(jose@6.1.1)(kysely@0.28.8)(nanostores@1.0.1)
-      '@zenstackhq/common-helpers': 3.0.0-beta.26
-      '@zenstackhq/language': 3.0.0-beta.26
-      '@zenstackhq/orm': 3.0.0-beta.26(pg@8.16.3)(zod@4.1.12)
+      '@zenstackhq/common-helpers': 3.0.0-beta.27
+      '@zenstackhq/language': 3.0.0-beta.27
+      '@zenstackhq/orm': 3.0.0-beta.27(pg@8.16.3)(zod@4.1.12)
       better-auth: 1.3.34(next@15.5.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       ts-pattern: 5.9.0
     transitivePeerDependencies:
@@ -14945,11 +14945,11 @@ snapshots:
       - sql.js
       - zod
 
-  '@zenstackhq/cli@3.0.0-beta.26(typescript@5.9.3)':
+  '@zenstackhq/cli@3.0.0-beta.27(typescript@5.9.3)':
     dependencies:
-      '@zenstackhq/common-helpers': 3.0.0-beta.26
-      '@zenstackhq/language': 3.0.0-beta.26
-      '@zenstackhq/sdk': 3.0.0-beta.26
+      '@zenstackhq/common-helpers': 3.0.0-beta.27
+      '@zenstackhq/language': 3.0.0-beta.27
+      '@zenstackhq/sdk': 3.0.0-beta.27
       colors: 1.4.0
       commander: 8.3.0
       execa: 9.6.0
@@ -14965,21 +14965,21 @@ snapshots:
       - supports-color
       - typescript
 
-  '@zenstackhq/common-helpers@3.0.0-beta.26': {}
+  '@zenstackhq/common-helpers@3.0.0-beta.27': {}
 
-  '@zenstackhq/language@3.0.0-beta.26':
+  '@zenstackhq/language@3.0.0-beta.27':
     dependencies:
-      '@zenstackhq/common-helpers': 3.0.0-beta.26
+      '@zenstackhq/common-helpers': 3.0.0-beta.27
       langium: 3.5.0
       pluralize: 8.0.0
       ts-pattern: 5.9.0
       vscode-languageserver: 9.0.1
 
-  '@zenstackhq/orm@3.0.0-beta.26(pg@8.16.3)(zod@4.1.12)':
+  '@zenstackhq/orm@3.0.0-beta.27(pg@8.16.3)(zod@4.1.12)':
     dependencies:
       '@paralleldrive/cuid2': 2.3.1
-      '@zenstackhq/common-helpers': 3.0.0-beta.26
-      '@zenstackhq/schema': 3.0.0-beta.26
+      '@zenstackhq/common-helpers': 3.0.0-beta.27
+      '@zenstackhq/schema': 3.0.0-beta.27
       decimal.js: 10.6.0
       json-stable-stringify: 1.3.0
       kysely: 0.28.8
@@ -14993,14 +14993,14 @@ snapshots:
     optionalDependencies:
       pg: 8.16.3
 
-  '@zenstackhq/schema@3.0.0-beta.26':
+  '@zenstackhq/schema@3.0.0-beta.27':
     dependencies:
       decimal.js: 10.6.0
 
-  '@zenstackhq/sdk@3.0.0-beta.26':
+  '@zenstackhq/sdk@3.0.0-beta.27':
     dependencies:
-      '@zenstackhq/common-helpers': 3.0.0-beta.26
-      '@zenstackhq/language': 3.0.0-beta.26
+      '@zenstackhq/common-helpers': 3.0.0-beta.27
+      '@zenstackhq/language': 3.0.0-beta.27
       langium: 3.5.0
       ts-pattern: 5.9.0
       typescript: 5.9.3

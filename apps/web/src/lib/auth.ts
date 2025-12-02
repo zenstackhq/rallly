@@ -234,7 +234,7 @@ export const authLib = betterAuth({
                     if (user.isAnonymous) {
                         return;
                     }
-                    // check if user exists in prisma
+                    // check if user exists in db
                     const existingUser = await db.user.findUnique({
                         where: {
                             id: user.id,
