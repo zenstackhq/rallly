@@ -16,9 +16,11 @@
 
 ![Screenshot](https://github.com/user-attachments/assets/baafea52-c4da-43bb-96ef-50840f1c0c03)
 
+> This repo is a fork of Rallly demonstrating migrating a real-world application from Prisma to ZenStack v3.
+
 Schedule group meetings with friends, colleagues and teams. Create meeting polls to find the best date and time to organize an event based on your participants' availability. Save time and avoid back-and-forth emails.
 
-Built with [Next.js](https://github.com/vercel/next.js/), [Prisma](https://github.com/prisma/prisma), [tRPC](https://github.com/trpc/trpc) & [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
+Built with [Next.js](https://github.com/vercel/next.js/), [ZenStack v3](https://github.com/zenstackhq/zenstack-v3), [tRPC](https://github.com/trpc/trpc) & [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
 
 ## Self-hosting
 
@@ -30,60 +32,59 @@ The following instructions are for running the project locally for development.
 
 1. Clone the repository and switch to the project directory
 
-   ```bash
-   git clone https://github.com/lukevella/rallly.git
-   cd rallly
-   ```
+    ```bash
+    git clone https://github.com/lukevella/rallly.git
+    cd rallly
+    ```
 
 2. Install dependencies
 
-   ```bash
-   pnpm install
-   ```
+    ```bash
+    pnpm install
+    ```
 
 3. Setup environment variables
 
-   Create a `.env` file by copying `.env.development`. This will be were you can set your [configuration options](https://support.rallly.co/self-hosting/configuration-options).
+    Create a `.env` file by copying `.env.development`. This will be were you can set your [configuration options](https://support.rallly.co/self-hosting/configuration-options).
 
-   ```bash
-   cp .env.development .env
-   ```
+    ```bash
+    cp .env.development .env
+    ```
 
-   **Note:** `.env.development` is preconfigured with default values for development. You can leave these as is for local development.
+    **Note:** `.env.development` is preconfigured with default values for development. You can leave these as is for local development.
 
-4. Generate Prisma client
+4. Generate ZenStack schema
 
-   ```bash
-   pnpm db:generate
-   ```
+    ```bash
+    pnpm db:generate
+    ```
 
 5. Setup database
 
-   You will need to have [Docker](https://docs.docker.com/get-docker/) installed and running to run the database using the provided docker-compose file.
+    You will need to have [Docker](https://docs.docker.com/get-docker/) installed and running to run the database using the provided docker-compose file.
 
-   To start the database, run:
+    To start the database, run:
 
-   ```bash
-   pnpm docker:up
-   ```
+    ```bash
+    pnpm docker:up
+    ```
 
-   Next run the following command to setup the database:
+    Next run the following command to setup the database:
 
-   ```bash
-   pnpm db:reset
-   ```
+    ```bash
+    pnpm db:reset
+    ```
 
-   This will:
-
-   - delete the existing database (if it exists)
-   - run migrations to create a new database schema
-   - seed the database with test users and random data
+    This will:
+    - delete the existing database (if it exists)
+    - run migrations to create a new database schema
+    - seed the database with test users and random data
 
 6. Start the Next.js server
 
-   ```bash
-   pnpm dev
-   ```
+    ```bash
+    pnpm dev
+    ```
 
 ## Contributors
 
@@ -112,6 +113,7 @@ Thank you to our sponsors for making this project possible.
 [Become a sponsor &rarr;](https://github.com/sponsors/lukevella)
 
 And thank you to these companies for sponsoring and showing support for this project.
+
 <table>
   <tbody>
     <tr>
